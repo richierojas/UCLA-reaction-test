@@ -54,57 +54,59 @@ export default function App() {
 
 
   return (
-    <div style={{ padding: 20, fontFamily: 'comic sans ms, cursive', textAlign: 'center'}}>
-      <h1 style={{ fontFamily: 'comic sans ms, cursive' }}>ucla reaction speed test</h1>
-      <p>State: <strong>{status}</strong></p>
-      <div style={{ marginBottom: 20, display: 'flex', gap: 12, justifyContent: 'center' }}>
-        <button
-          style={{ ...buttonStyle, backgroundColor: '#4CAF50', color: 'white' }}
-          onClick={() => {
-            startGame();
-            playMegalovania();
+
+    <div style={{ backgroundImage: 'url(/public/undertale_bg.png)', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh',width: '100%'}}>
+      <div style={{ padding: 20, fontFamily: 'comic sans ms, cursive', textAlign: 'center', color: 'white' }}>
+        <h1 style={{ fontFamily: 'comic sans ms, cursive', color: '#ffd100' }}>ucla reaction speed test</h1>
+        <p>State: <strong>{status}</strong></p>
+        <div style={{ marginBottom: 20, display: 'flex', gap: 12, justifyContent: 'center' }}>
+          <button
+            style={{ ...buttonStyle, backgroundColor: '#4CAF50', color: 'white' }}
+            onClick={() => {
+              startGame();
+              playMegalovania();
+            }}
+            disabled={status === 'waiting'}
+          >
+            start
+          </button>
+          <button
+            style={{ ...buttonStyle, backgroundColor: '#f44336', color: 'white' }}
+            onClick={() => {
+              registerClick();
+              pauseMegalovania();
+            }}
+          >
+            click
+          </button>
+          <button
+            style={{ ...buttonStyle, backgroundColor: '#ff9800', color: 'white' }}
+            onClick={() => {
+              reset();
+              stopMegalovania();
+            }}
+          >
+            reset
+          </button>
+        </div>
+        <div style = {{color: 'white', fontSize: '19px', fontFamily: 'comic sans ms, cursive'}}>
+          <p><strong>last reaction:</strong> {lastReaction != null ? `${Math.round(lastReaction)}, ms` : '—'}</p>
+          <p><strong>average:</strong> {average != null ? `${Math.round(average)} ms` : '—'}</p>
+          <p><strong>best:</strong> {best != null ? `${Math.round(best)} ms` : '—'}</p>
+          <p><strong>all:</strong> {reactionTimes.length ? reactionTimes.map(t => `${Math.round(t)}ms`).join(', ') : '—'}</p>
+        </div>
+        {/* Jonathan added this image of sans to the bottom right corner of the screen. */}
+        <img
+          src={sans}
+          alt="hey im senana. senana the skenana"
+          style={{
+            position: 'fixed',
+            bottom: 20,
+            right: 20,
+            width: 250,
+            objectFit: 'contain',
           }}
-          disabled={status === 'waiting'}
-        >
-          start
-        </button>
-        <button
-          style={{ ...buttonStyle, backgroundColor: '#f44336', color: 'white' }}
-          onClick={() => {
-            registerClick();
-            pauseMegalovania();
-          }}
-        >
-          click
-        </button>
-        <button
-          style={{ ...buttonStyle, backgroundColor: '#ff9800', color: 'white' }}
-          onClick={() => {
-            reset();
-            stopMegalovania();
-          }}
-        >
-          reset
-        </button>
-      </div>
-      <div>
-        <p>last reaction: {lastReaction != null ? `${Math.round(lastReaction)} ms` : '—'}</p>
-        <p>average: {average != null ? `${Math.round(average)} ms` : '—'}</p>
-        <p>best: {best != null ? `${Math.round(best)} ms` : '—'}</p>
-        <p>all: {reactionTimes.length ? reactionTimes.map(t => `${Math.round(t)}ms`).join(', ') : '—'}</p>
-      </div>
-      {/* Jonathan added this image of sans to the bottom right corner of the screen. */}
-      <img
-        src={sans}
-        alt="hey im senana. senana the skenana"
-        style={{
-          position: 'fixed',
-          bottom: 20,
-          right: 20,
-          width: 250,
-          objectFit: 'contain',
-        }}
-      />
+      /></div>
     </div>
   )
 }
