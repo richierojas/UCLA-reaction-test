@@ -1,6 +1,7 @@
 import React from 'react'
 import useReactionTimer from './hooks/useReactionTimer'
 import sans from './assets/sans.png'
+import {useRef} from 'react';
 
 // This is the simple UI for the game.
 // It only shows the state and buttons.
@@ -27,6 +28,27 @@ export default function App() {
   }
 
 
+// Code to control when MEGALOVANIA plays while the game is played! - Lorenzo
+
+
+  const megalovania = useRef(
+      new Audio("/public/Toby Fox - UNDERTALE Soundtrack - 100 MEGALOVANIA.mp3")
+  )
+
+  const playMegalovania = () => {
+      megalovania.current.play();
+  }
+
+  const pauseMegalovania = () => {
+      megalovania.current.pause();
+  }
+
+  const stopMegalovania = () => {
+      megalovania.current.pause();
+      megalovania.current.currentTime = 0;
+  }
+
+
 // Jonathan made these edits below! Just changed the button colors and added some padding to the div. Also changed the font to comic 
 // sans because geeeeeeeeeet dunked on!!!
 
@@ -38,20 +60,29 @@ export default function App() {
       <div style={{ marginBottom: 20, display: 'flex', gap: 12, justifyContent: 'center' }}>
         <button
           style={{ ...buttonStyle, backgroundColor: '#4CAF50', color: 'white' }}
-          onClick={startGame}
+          onClick={() => {
+            startGame();
+            playMegalovania();
+          }}
           disabled={status === 'waiting'}
         >
           start
         </button>
         <button
           style={{ ...buttonStyle, backgroundColor: '#f44336', color: 'white' }}
-          onClick={registerClick}
+          onClick={() => {
+            registerClick();
+            pauseMegalovania();
+          }}
         >
           click
         </button>
         <button
           style={{ ...buttonStyle, backgroundColor: '#ff9800', color: 'white' }}
-          onClick={reset}
+          onClick={() => {
+            reset();
+            stopMegalovania();
+          }}
         >
           reset
         </button>
