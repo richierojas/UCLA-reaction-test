@@ -90,7 +90,7 @@ export default function App() {
           </button>
         </div>
         <div style = {{color: 'white', fontSize: '19px', fontFamily: 'comic sans ms, cursive'}}>
-          <p><strong>last reaction:</strong> {lastReaction != null ? `${Math.round(lastReaction)}, ms` : '—'}</p>
+          <p><strong>last reaction:</strong> {lastReaction != null ? `${Math.round(lastReaction)} ms` : '—'}</p>
           <p><strong>average:</strong> {average != null ? `${Math.round(average)} ms` : '—'}</p>
           <p><strong>best:</strong> {best != null ? `${Math.round(best)} ms` : '—'}</p>
           <p><strong>all:</strong> {reactionTimes.length ? reactionTimes.map(t => `${Math.round(t)}ms`).join(', ') : '—'}</p>
